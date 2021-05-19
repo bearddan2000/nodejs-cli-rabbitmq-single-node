@@ -1,0 +1,17 @@
+version: "3"
+
+services:
+  rabbitmq:
+    image: rabbitmq:3.6.6-management
+    environment:
+      - RABBITMQ_NODE_PORT=5672
+
+  producer:
+    build: producer
+    depends_on:
+      - rabbitmq
+
+  consumer:
+    build: consumer
+    depends_on:
+      - producer
